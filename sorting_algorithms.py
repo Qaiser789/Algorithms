@@ -94,3 +94,32 @@ class Sort_Algorithms(object):
             return merge(left_list, right_list)
         merge_sorter(nums)
         return nums
+    
+    def quick_sort(self, nums):
+        def partition(nums, low, high):
+            pivot = nums[(low + high) // 2]
+            i = low - 1
+            j = high + 1
+            while True:
+                i += 1
+                while nums[i] < pivot:
+                    i += 1
+                j -= 1
+                while nums[j] > pivot:
+                    j -= 1
+                if i >= j:
+                    return j
+                nums[i], nums[j] = nums[j], nums[i]
+
+        def quick_sorter(nums):
+            def _quick_sorter(items, low, high):
+                if low < high:
+                    split_index = partition(items, low, high)
+                    _quick_sorter(items, low, split_index)
+                    _quick_sorter(items, split_index + 1, high)
+            _quick_sorter(nums, 0, len(nums) - 1)
+        quick_sorter(nums)
+        return nums
+
+if __name__ == "__main__":
+    print(Sort_Algorithms())
